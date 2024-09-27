@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Slider de Imagem Centralizado</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<header>
+
+    <img id="logo" src="Cream_and_Brown_Retro_Streetwear_Logo__1_-removebg-preview.png">
+    <h1>Cone-pop</h1>
+</header>
+
+<div id="fix">
+    
+    <img id="logofix" src="cone-pop-removebg-preview.png">
+    <div class="countdown" id="countdown"><h1 id="countdowntxxt"></h1></div>
+</div>
+
+<body>
+
+    
+
+    <section class="slider">
+        <div>
+            <div class="slides">
+                <div class="slide active"><img src="https://images3.alphacoders.com/134/1345999.png" alt="Slide 1"
+                        style="width: 100%; height: auto;"></div>
+                <div class="slide"><img
+                        src="https://png.pngtree.com/background/20230526/original/pngtree-d-rendering-of-ice-cream-in-a-cone-with-chocolate-and-picture-image_2743724.jpg"
+                        alt="Slide 2" style="width: 100%; height: auto;"></div>
+                <div class="slide"><img
+                        src="https://img.pikbest.com/ai/illus_our/20230427/879f34dc37a6a87a77df1ce82db2f8e7.jpg!w700wp"
+                        alt="Slide 3" style="width: 100%; height: auto;">
+                </div>
+                <div class="slide"><img
+                        src="https://img.pikbest.com/ai/illus_our/20230427/3607bb59299636c12c70f19a2646e219.jpg!w700wp"
+                        alt="Slide 3" style="width: 100%; height: auto;">
+                </div>
+                <div class="buttons">
+                    <button class="button" id="prev">Anterior</button>
+                    <button class="button" id="next">Próximo</button>
+                </div>
+            </div>
+
+
+        </div>
+    </section>
+    <section>
+        <table>
+            <tr>
+                <th>Produto</th>
+                <th>Peso (g)</th>
+                <th>Preço</th>
+            </tr>
+            <tr>
+                <td>Cone recheado</td>
+                <td>70g</td>
+                <td>R$6,00</td>
+            </tr>
+            <tr>
+                <td>Sorvete de Casquinha</td>
+                <td>100g</td>
+                <td>R$5,00</td>
+            </tr>
+            <tr>
+                <td>Cone de Chocolate</td>
+                <td>80g</td>
+                <td>R$7,00</td>
+            </tr>
+        </table>
+    </section>
+
+    <script>
+        const slides = document.querySelectorAll('.slide');
+        let currentIndex = 0;
+
+        function updateSlider() {
+            slides.forEach((slide, index) => {
+                slide.classList.remove('active');
+                if (index === currentIndex) {
+                    slide.classList.add('active');
+                }
+            });
+        }
+        var time = 5000
+
+        function showNextSlide() {
+            let soma = time + 30000
+            currentIndex = (currentIndex + 1) % slides.length;
+            updateSlider();
+        }
+
+        function showPrevSlide() {
+            let soma = time + 30000
+            currentIndex = (currentIndex - 1 + slides.length) % slides.length;
+            updateSlider();
+        }
+
+        document.getElementById('next').addEventListener('click', showNextSlide);
+        document.getElementById('prev').addEventListener('click', showPrevSlide);
+
+        // Intervalo automático
+
+        setInterval(showNextSlide, time); // Muda a imagem a cada 3 segundos
+
+        // Temporizador
+        const countDownDate = new Date("nov15, 2024 00:00:00").getTime();
+
+        const countdown = setInterval(() => {
+            const now = new Date().getTime();
+            const distance = countDownDate - now;
+
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            document.getElementById("countdown").innerHTML = `Faltam ${days} dias  ${hours} horas.`;
+
+            if (distance < 0) {
+                clearInterval(countdown);
+                document.getElementById("countdown").innerHTML = "Tempo esgotado!";
+            }
+        }, 1000);
+    </script>
+
+</body>
+
+</html>
